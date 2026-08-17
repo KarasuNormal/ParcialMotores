@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 8b35f83fdcc30434e8d37b43903e1c5f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 6418180475301049370
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 196526
+  packageName: Starter Assets - ThirdPerson | Updates in new CharacterController
+    package
+  packageVersion: 1.1.7
+  assetPath: Assets/StarterAssets/ThirdPersonController/Character/Sfx/Player_Land.asset
+  uploadId: 879174

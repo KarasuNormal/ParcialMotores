@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: ef05be445e3284c9c93fe860c0837942
+labels:
+- Footstep
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 6418180475301049370
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 196526
+  packageName: Starter Assets - ThirdPerson | Updates in new CharacterController
+    package
+  packageVersion: 1.1.7
+  assetPath: Assets/StarterAssets/ThirdPersonController/Character/Sfx/Concrete_Footsteps/Footstep_Concrete.asset
+  uploadId: 879174

@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1233149941 &-3038339863073270411
+AudioContainerElement:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Player_Land_02_{-3038339863073270411}
+  m_AudioClip: {fileID: 8300000, guid: c37138872f61b4418be9e8c1084790ac, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-2236532293860724103
+AudioContainerElement:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Player_Land_01_{-2236532293860724103}
+  m_AudioClip: {fileID: 8300000, guid: b13fd8dee3cf44c40859bf6c987bf68c, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &3241090870461451841
+AudioContainerElement:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Player_Land_03_{3241090870461451841}
+  m_AudioClip: {fileID: 8300000, guid: a3da1afec2ee3465db49602a61ef0ec7, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1307931743 &6418180475301049370
+AudioRandomContainer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Player_Land
+  m_Volume: 0
+  m_Pitch: 200
+  m_AutomaticTriggerTime: 0.2
+  m_LoopCount: 2
+  m_VolumeRandomizationRange: {x: -5, y: 0}
+  m_PitchRandomizationRange: {x: 0, y: 500}
+  m_AutomaticTriggerTimeRandomizationRange: {x: 0, y: 0}
+  m_LoopCountRandomizationRange: {x: 0, y: 0}
+  m_Elements:
+  - {fileID: -2236532293860724103}
+  - {fileID: -3038339863073270411}
+  - {fileID: 3241090870461451841}
+  m_AvoidRepeatingLast: 2
+  m_PlaybackMode: 2
+  m_TriggerMode: 0
+  m_AutomaticTriggerMode: 0
+  m_LoopMode: 1
+  m_VolumeRandomizationEnabled: 1
+  m_PitchRandomizationEnabled: 1
+  m_AutomaticTriggerTimeRandomizationEnabled: 0
+  m_LoopCountRandomizationEnabled: 0

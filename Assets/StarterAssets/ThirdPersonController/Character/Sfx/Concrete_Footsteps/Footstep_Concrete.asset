@@ -1,0 +1,82 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1233149941 &-7586714597313585321
+AudioContainerElement:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Concrete_05_{-7586714597313585321}
+  m_AudioClip: {fileID: 8300000, guid: 1834ec69586af4bccb2b0595d9065d3e, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-6025000786359728421
+AudioContainerElement:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Concrete_04_{-6025000786359728421}
+  m_AudioClip: {fileID: 8300000, guid: f6c46c2ca4f624aacabaa487bb4ed6e4, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-4330494011686235080
+AudioContainerElement:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Concrete_02_{-4330494011686235080}
+  m_AudioClip: {fileID: 8300000, guid: becc44e5c724942ff9db71e50e0cf47f, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-250991000991268778
+AudioContainerElement:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Concrete_01_{-250991000991268778}
+  m_AudioClip: {fileID: 8300000, guid: 3515527f48a854c658f6654d89c03d44, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1307931743 &6418180475301049370
+AudioRandomContainer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Footstep_Concrete
+  m_Volume: -10
+  m_Pitch: 500
+  m_AutomaticTriggerTime: 1
+  m_LoopCount: 1
+  m_VolumeRandomizationRange: {x: -2, y: 2}
+  m_PitchRandomizationRange: {x: 0, y: 500}
+  m_AutomaticTriggerTimeRandomizationRange: {x: -0.5, y: 0.5}
+  m_LoopCountRandomizationRange: {x: 0, y: 0}
+  m_Elements:
+  - {fileID: -250991000991268778}
+  - {fileID: -4330494011686235080}
+  - {fileID: 7655602436142396064}
+  - {fileID: -6025000786359728421}
+  - {fileID: -7586714597313585321}
+  m_AvoidRepeatingLast: 0
+  m_PlaybackMode: 2
+  m_TriggerMode: 0
+  m_AutomaticTriggerMode: 0
+  m_LoopMode: 0
+  m_VolumeRandomizationEnabled: 1
+  m_PitchRandomizationEnabled: 1
+  m_AutomaticTriggerTimeRandomizationEnabled: 1
+  m_LoopCountRandomizationEnabled: 0
+--- !u!1233149941 &7655602436142396064
+AudioContainerElement:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Concrete_03_{7655602436142396064}
+  m_AudioClip: {fileID: 8300000, guid: 2751f72ca7b6249dabb2f404db45c29f, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
