@@ -2505,7 +2505,6 @@ GameObject:
   - component: {fileID: 5996506079267137836}
   - component: {fileID: 953036517502786381}
   - component: {fileID: 2743975810950015953}
-  - component: {fileID: 8712193223673012529}
   m_Layer: 0
   m_Name: Edifice_two (1)
   m_TagString: Untagged
@@ -2827,28 +2826,6 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 178820661223797666}
-  m_Mesh: {fileID: 0}
---- !u!64 &8712193223673012529
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 178820661223797666}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
   m_Mesh: {fileID: 0}
 --- !u!1 &186720353335631981
 GameObject:
