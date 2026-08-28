@@ -5,7 +5,7 @@ using StarterAssets;
 public class DefeatTimer : MonoBehaviour
 {
     [Header("Configuration")]
-    [SerializeField] private float timeLimit = 600f; // 10 minutes in seconds
+    [SerializeField] private float timeLimit = 600f;
     [SerializeField] private GameObject defeatPanel;
     [SerializeField] private TextMeshProUGUI timeText;
 
@@ -30,6 +30,9 @@ public class DefeatTimer : MonoBehaviour
             defeatTriggered = true;
             Debug.Log("DEFEAT: time ran out, you didn't reach the helicopter.");
             defeatPanel.SetActive(true);
+
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
 
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             if (player != null)

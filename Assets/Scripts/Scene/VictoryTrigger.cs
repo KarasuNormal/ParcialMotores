@@ -12,6 +12,9 @@ public class VictoryTrigger : MonoBehaviour
             Debug.Log("VICTORY! The player reached the helicopter.");
             victoryPanel.SetActive(true);
 
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+
             ThirdPersonController controller = other.GetComponent<ThirdPersonController>();
             if (controller != null)
             {
