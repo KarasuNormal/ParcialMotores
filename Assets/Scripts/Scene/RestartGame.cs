@@ -11,6 +11,7 @@ public class RestartGame : MonoBehaviour
 
     public void Restart()
     {
+        Debug.Log("RESTART fue llamado");
         Scene currentScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(currentScene.name);
     }

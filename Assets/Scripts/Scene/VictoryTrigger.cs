@@ -4,6 +4,7 @@ using StarterAssets;
 public class VictoryTrigger : MonoBehaviour
 {
     [SerializeField] private GameObject victoryPanel;
+    [SerializeField] private DefeatTimer defeatTimer;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -14,6 +15,11 @@ public class VictoryTrigger : MonoBehaviour
 
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+
+            if (defeatTimer != null)
+            {
+                defeatTimer.StopTimer();
+            }
 
             ThirdPersonController controller = other.GetComponent<ThirdPersonController>();
             if (controller != null)
