@@ -10,8 +10,11 @@ public class WallMovement : MonoBehaviour
     [SerializeField] private bool wallOnLeft;
     [SerializeField] private float wallDetectionDistance;
     [SerializeField] private string wallTag;
-
     [SerializeField] private ThirdPersonController _controller;
+
+    [SerializeField] private float  wallJumpSideForce = 8f;
+
+    [SerializeField] private float wallJumpUpForce = 10f;
 
     private void Start()
     {
@@ -67,6 +70,15 @@ public class WallMovement : MonoBehaviour
     private void WallJump()
     {
         
+        if (Keyboard.current.xKey.wasPressedThisFrame)
+        {
+            Vector3 wallNormal = wallOnRight ? hitRight.normal : hitLeft.normal;
+
+            Vector3 jumpDirection = wallNormal * wallJumpSideForce + Vector3.up * wallJumpUpForce;
+
+            _controller.GetComponent<CharacterController>().Move(jumpDirection * Time.deltaTime);
+        }
+            
     }
 
 }
