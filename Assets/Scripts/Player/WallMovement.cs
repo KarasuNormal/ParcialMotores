@@ -16,9 +16,12 @@ public class WallMovement : MonoBehaviour
 
     [SerializeField] private float wallJumpUpForce = 10f;
 
+    private Animator _animator;
+
     private void Start()
     {
         _controller = GetComponent<ThirdPersonController>();
+        _animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -37,7 +40,6 @@ public class WallMovement : MonoBehaviour
             WallRun();
             WallJump();
         }
-        
     }
 
     private bool CheckWall(Vector3 direction, out RaycastHit hitInfo)
@@ -63,22 +65,26 @@ public class WallMovement : MonoBehaviour
 
         if (isNearWall && isAirborne && isKeyHeld)
         {
-            Debug.Log("Wall run activo");
+            _animator.SetBool("IsWallRunning", true);
+        }
+        else
+        {
+            _animator.SetBool("IsWallRunning", false);
         }
     }     
     
     private void WallJump()
     {
-        
-        if (Keyboard.current.xKey.wasPressedThisFrame)
+        if (Keyboard.current.yKey.wasPressedThisFrame)
         {
             Vector3 wallNormal = wallOnRight ? hitRight.normal : hitLeft.normal;
 
             Vector3 jumpDirection = wallNormal * wallJumpSideForce + Vector3.up * wallJumpUpForce;
 
-            _controller.GetComponent<CharacterController>().Move(jumpDirection * Time.deltaTime);
-        }
-            
+            _controller.ApplyWallJumpImpulse(jumpDirection);
+
+            _animator.SetTrigger("WallJumpTrigger");
+        }    
     }
 
 }

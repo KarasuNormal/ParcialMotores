@@ -88,6 +88,7 @@ namespace StarterAssets
         private float _targetRotation = 0.0f;
         private float _rotationVelocity;
         private float _verticalVelocity;
+        private Vector3 _externalImpulse = Vector3.zero;
         private float _terminalVelocity = 53.0f;
 
         // timeout deltatime
@@ -270,9 +271,9 @@ namespace StarterAssets
 
             Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
 
-            // move the player
-            _controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
-                             new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+            _controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime + _externalImpulse * Time.deltaTime);
+
+            _externalImpulse = Vector3.Lerp(_externalImpulse, Vector3.zero, Time.deltaTime * 5f);
 
             // update animator if using character
             if (_hasAnimator)
@@ -349,6 +350,12 @@ namespace StarterAssets
             {
                 _verticalVelocity += Gravity * Time.deltaTime;
             }
+        }
+
+        public void ApplyWallJumpImpulse(Vector3 impulse)
+        {
+            _externalImpulse = impulse;
+            _verticalVelocity = impulse.y;
         }
 
         private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
