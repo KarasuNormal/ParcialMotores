@@ -22,6 +22,15 @@ public class BreakablePlatform : DynamicPlatform
 
         public override void Activate()
         {
+            foreach (var mesh in GetComponentsInChildren<MeshCollider>())
+            {
+                if (mesh.enabled && mesh.gameObject.activeInHierarchy &&
+                    mesh.attachedRigidbody == rb && !mesh.convex)
+                {
+                    Debug.LogWarning("La rotura necesita un collider convexo o colliders simples. La plataforma permanece cinematica.", this);
+                    return;
+                }
+            }
             rb.isKinematic = false;
 
             rb.AddForce(Vector3.down * downwardForce, ForceMode.Impulse);

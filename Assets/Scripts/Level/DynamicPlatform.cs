@@ -16,9 +16,15 @@ public abstract class DynamicPlatform : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Player"))
         {
-            activated = true;
-            StartCoroutine(ActivateAfterDelay());
+            RequestActivation();
         }
+    }
+
+    public void RequestActivation()
+    {
+        if (activated || !isActiveAndEnabled) return;
+        activated = true;
+        StartCoroutine(ActivateAfterDelay());
     }
 
     private IEnumerator ActivateAfterDelay()
