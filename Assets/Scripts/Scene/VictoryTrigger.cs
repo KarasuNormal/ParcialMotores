@@ -4,7 +4,7 @@ using StarterAssets;
 public class VictoryTrigger : MonoBehaviour
 {
     [SerializeField] private GameObject victoryPanel;
-    [SerializeField] private DefeatTimer defeatTimer;
+    private DefeatTimer defeatTimer;
 
     private void OnTriggerEnter(Collider other)
     {
