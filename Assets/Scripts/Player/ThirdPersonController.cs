@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
 #endif
@@ -78,24 +79,32 @@ namespace StarterAssets
         [Tooltip("For locking the camera position on all axis")]
         public bool LockCameraPosition = false;
 
-        // cinemachine
+        [Header ("Cine machine")]
         private float _cinemachineTargetYaw;
         private float _cinemachineTargetPitch;
 
-        // player
+        [Header ("Player")]
         private float _speed;
         private float _animationBlend;
         private float _targetRotation = 0.0f;
         private float _rotationVelocity;
         private float _verticalVelocity;
-        private Vector3 _externalImpulse = Vector3.zero;
         private float _terminalVelocity = 53.0f;
 
-        // timeout deltatime
+        [Header ("Wall Run")]
+        private Vector3 _externalImpulse = Vector3.zero;
+        [SerializeField] private float wallRunGravityDamping = 5f;
+
+        private bool _isWallRunning = false;
+        private Vector3 _wallRunDirection = Vector3.zero;
+        private float _wallRunSpeed = 0f;
+
+
+        [Header("Timeout deltatime")]
         private float _jumpTimeoutDelta;
         private float _fallTimeoutDelta;
 
-        // animation IDs
+        [Header("Animations ID")]
         private int _animIDSpeed;
         private int _animIDGrounded;
         private int _animIDJump;
@@ -224,7 +233,10 @@ namespace StarterAssets
 
             // note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
             // if there is no input, set the target speed to 0
-            if (_input.move == Vector2.zero) targetSpeed = 0.0f;
+            if (_input.move == Vector2.zero)
+            {
+                targetSpeed = 0.0f;
+            }
 
             // a reference to the players current horizontal velocity
             float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
@@ -233,8 +245,7 @@ namespace StarterAssets
             float inputMagnitude = _input.analogMovement ? _input.move.magnitude : 1f;
 
             // accelerate or decelerate to target speed
-            if (currentHorizontalSpeed < targetSpeed - speedOffset ||
-                currentHorizontalSpeed > targetSpeed + speedOffset)
+            if (currentHorizontalSpeed < targetSpeed - speedOffset || currentHorizontalSpeed > targetSpeed + speedOffset)
             {
                 // creates curved result rather than a linear one giving a more organic speed change
                 // note T in Lerp is clamped, so we don't need to clamp our speed
@@ -281,6 +292,19 @@ namespace StarterAssets
                 _animator.SetFloat(_animIDSpeed, _animationBlend);
                 _animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
             }
+
+            if(_isWallRunning)
+            {
+                _controller.Move(_wallRunDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime + _externalImpulse * Time.deltaTime);
+                _externalImpulse = Vector3.Lerp(_externalImpulse, Vector3.zero, Time.deltaTime * 5f);
+            }
+        }
+
+        public void SetWallRun(bool isActive, Vector3 direction, float speed)
+        {
+            _isWallRunning = isActive;
+            _wallRunDirection = direction;
+            _wallRunSpeed = speed;
         }
 
         private void JumpAndGravity()
@@ -350,6 +374,15 @@ namespace StarterAssets
             {
                 _verticalVelocity += Gravity * Time.deltaTime;
             }
+
+            if (_isWallRunning)
+            {
+                _verticalVelocity = Mathf.Lerp(_verticalVelocity, 0f, Time.deltaTime * wallRunGravityDamping);
+            }
+            else if (_verticalVelocity < _terminalVelocity)
+            {
+                _verticalVelocity += Gravity * Time.deltaTime;
+            }
         }
 
         public void ApplyWallJumpImpulse(Vector3 impulse)
@@ -360,8 +393,15 @@ namespace StarterAssets
 
         private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
         {
-            if (lfAngle < -360f) lfAngle += 360f;
-            if (lfAngle > 360f) lfAngle -= 360f;
+            if (lfAngle < -360f)
+            {
+                lfAngle += 360f;
+            }
+            if (lfAngle > 360f)
+            {
+                lfAngle -= 360f;
+            }
+
             return Mathf.Clamp(lfAngle, lfMin, lfMax);
         }
 
@@ -370,8 +410,14 @@ namespace StarterAssets
             Color transparentGreen = new Color(0.0f, 1.0f, 0.0f, 0.35f);
             Color transparentRed = new Color(1.0f, 0.0f, 0.0f, 0.35f);
 
-            if (Grounded) Gizmos.color = transparentGreen;
-            else Gizmos.color = transparentRed;
+            if (Grounded) 
+            {
+                Gizmos.color = transparentGreen;
+            }
+            else 
+            {
+                Gizmos.color = transparentRed;
+            }
 
             // when selected, draw a gizmo in the position of, and matching radius of, the grounded collider
             Gizmos.DrawSphere(
@@ -383,11 +429,15 @@ namespace StarterAssets
         {
             if (animationEvent.animatorClipInfo.weight > 0.5f)
             {
-
                 if (AudioFootsteps != null)
+                {
                     AudioFootsteps.Play();
+                }
+
                 if (AudioFoley != null)
+                {
                     AudioFoley.Play();
+                }
             }
         }
 
@@ -396,8 +446,9 @@ namespace StarterAssets
             if (animationEvent.animatorClipInfo.weight > 0.5f)
             {
                 if (LandingAudio != null)
+                {
                     LandingAudio.Play();
-
+                }
             }
         }
     }
