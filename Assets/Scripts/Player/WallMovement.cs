@@ -13,6 +13,9 @@ public class WallMovement : MonoBehaviour
     [SerializeField] private float wallJumpSideForce = 8f;
     [SerializeField] private float wallJumpUpForce = 10f;
     
+    [Header ("Wall Run")]
+    [SerializeField] private float wallRunSpeed = 6f;
+    
     private Transform lastWallJumped;
     private ThirdPersonController _controller;
     private Animator _animator;
@@ -75,15 +78,23 @@ public class WallMovement : MonoBehaviour
         bool isAirborne = !_controller.Grounded;
         bool isKeyHeld = Keyboard.current.xKey.isPressed; 
 
-        if (isAirborne && isKeyHeld)
+        if (isAirborne && isKeyHeld && (wallOnRight || wallOnLeft))
         {
-            //_animator.SetBool("IsWallRunning", true);
+            Vector3 wallNormal = wallOnRight ? hitRight.normal : hitLeft.normal;
+            Vector3 wallRunDirection = Vector3.Cross(wallNormal,Vector3.up);
 
-            
+            if (Vector3.Dot(wallRunDirection, transform.forward)< 0)
+            {
+                wallRunDirection = -wallRunDirection;
+            }
+
+            _controller.SetWallRun(true, wallRunDirection, wallRunSpeed);
+            _animator.SetBool("IsWallRunning", true);
         }
         else
         {
-            //_animator.SetBool("IsWallRunning", false);
+            _controller.SetWallRun(false, Vector3.zero, 0f);
+            _animator.SetBool("IsWallRunning", false);
         }
     }
 
@@ -121,7 +132,7 @@ public class WallMovement : MonoBehaviour
                 Vector3 jumpDirection = (wallNormal * wallJumpSideForce) + (Vector3.up * wallJumpUpForce);
                 _controller.ApplyWallJumpImpulse(jumpDirection);
 
-                // _animator.SetTrigger("WallJumpTrigger");
+                _animator.SetTrigger("WallJumpTrigger");
             }
         }
     }
