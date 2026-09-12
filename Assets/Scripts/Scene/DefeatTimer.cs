@@ -1,6 +1,6 @@
 using UnityEngine;
 using TMPro;
-using StarterAssets;
+using CharacterScripts;
 
 public class DefeatTimer : MonoBehaviour
 {
@@ -37,7 +37,7 @@ public class DefeatTimer : MonoBehaviour
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             if (player != null)
             {
-                ThirdPersonController controller = player.GetComponent<ThirdPersonController>();
+                CharacterControllerCs controller = player.GetComponent<CharacterControllerCs>();
                 if (controller != null)
                 {
                     controller.enabled = false;

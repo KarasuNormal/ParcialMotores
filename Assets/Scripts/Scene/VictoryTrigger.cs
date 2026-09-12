@@ -1,5 +1,5 @@
 using UnityEngine;
-using StarterAssets;
+using CharacterScripts;
 
 public class VictoryTrigger : MonoBehaviour
 {
@@ -21,7 +21,7 @@ public class VictoryTrigger : MonoBehaviour
                 defeatTimer.StopTimer();
             }
 
-            ThirdPersonController controller = other.GetComponent<ThirdPersonController>();
+            CharacterControllerCs controller = other.GetComponent<CharacterControllerCs>();
             if (controller != null)
             {
                 controller.enabled = false;

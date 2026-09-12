@@ -1,4 +1,4 @@
-using StarterAssets;
+using CharacterScripts;
 using UnityEngine;
 
 public class Void : MonoBehaviour
@@ -21,7 +21,7 @@ public class Void : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
 
-            ThirdPersonController controller = other.GetComponent<ThirdPersonController>();
+            CharacterControllerCs controller = other.GetComponent<CharacterControllerCs>();
             if (controller != null)
             {
                 controller.enabled = false;
