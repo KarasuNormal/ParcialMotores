@@ -1,27 +1,49 @@
+using CharacterScripts;
 using UnityEngine;
 
 public class AsteroidBehaviour : MonoBehaviour
 {
-    [SerializeField] private float destroyDelay = 3f;
+    private GameObject warningMarker;
 
-    private bool hasLanded = false;
+    [SerializeField] private GameObject defeatPanel;
+    private DefeatTimer defeatTimer;
 
-    private void OnCollisionEnter(Collision collision)
+    public void Initialize(Vector3 targetPosition, float speed, GameObject marker)
     {
-        if (!hasLanded)
+        warningMarker = marker;
+
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb != null)
         {
-            hasLanded = true;
-            Debug.Log("Asteroid landed, will be destroyed in " + destroyDelay + " seconds.");
+            rb.useGravity = false;
 
-            Rigidbody rb = GetComponent<Rigidbody>();
-            if (rb != null)
-            {
-                rb.linearVelocity = Vector3.zero;
-                rb.angularVelocity = Vector3.zero;
-                rb.isKinematic = true;
-            }
-
-            Destroy(gameObject, destroyDelay);
+            Vector3 direction = (targetPosition - transform.position).normalized;
+            rb.linearVelocity = direction * speed;
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (warningMarker != null)
+        {
+            Destroy(warningMarker);
+        }
+
+        if (other.gameObject.CompareTag("Player"))
+        {
+            defeatTimer.StopTimer();
+            Debug.Log("DEFEAT! Asteroid kill you.");
+            defeatPanel.SetActive(true);
+
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+
+            CharacterControllerCs controller = other.GetComponent<CharacterControllerCs>();
+            if (controller != null) {
+                controller.enabled = false;
+            }
+        }
+
+        Destroy(gameObject);
     }
 }

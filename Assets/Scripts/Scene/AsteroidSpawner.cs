@@ -2,17 +2,15 @@ using UnityEngine;
 
 public class AsteroidSpawner : MonoBehaviour
 {
-    [Header("Configuration")]
+    [Header("Prefabs")]
     [SerializeField] private GameObject asteroidPrefab;
-    [SerializeField] private float spawnInterval = 5f;
-    [SerializeField] private float spawnHeight = 15f;
-    [SerializeField] private float spawnRangeX = 5f;
-    [SerializeField] private float spawnRangeZ = 5f;
-    [SerializeField] private float forwardDistance = 15f;
-    [SerializeField] private float fallSpeedBoost = 15f;
+    [SerializeField] private GameObject warningMarkerPrefab;
 
-    [Header("Angled Fall")]
-    [SerializeField] private float horizontalForce = 5f;
+    [Header("Configuration")]
+    [SerializeField] private float spawnInterval = 5f;
+    [SerializeField] private float spawnHeight = 25f;
+    [SerializeField] private float diagonalOffset = 20f;
+    [SerializeField] private float fallSpeed = 25f;
 
     private float timer;
     private Transform player;
@@ -45,32 +43,18 @@ public class AsteroidSpawner : MonoBehaviour
 
     private void SpawnAsteroid()
     {
-        Vector3 forwardPoint = player.position + player.forward * forwardDistance;
+        Vector3 targetPosition = player.position;
 
-        float randomX = Random.Range(-spawnRangeX, spawnRangeX);
-        float randomZ = Random.Range(-spawnRangeZ, spawnRangeZ);
+        GameObject marker = Instantiate(warningMarkerPrefab, targetPosition + (Vector3.up * 0.1f), Quaternion.identity);
 
-        Vector3 spawnPosition = new Vector3(
-            forwardPoint.x + randomX,
-            player.position.y + spawnHeight,
-            forwardPoint.z + randomZ
-        );
+        Vector3 spawnPosition = targetPosition + new Vector3(diagonalOffset, spawnHeight, diagonalOffset);
 
         GameObject asteroid = Instantiate(asteroidPrefab, spawnPosition, Quaternion.identity);
 
-        Rigidbody rb = asteroid.GetComponent<Rigidbody>();
-        if (rb != null)
+        AsteroidBehaviour behaviour = asteroid.GetComponent<AsteroidBehaviour>();
+        if (behaviour != null)
         {
-            Vector3 randomDirection = new Vector3(
-                Random.Range(-1f, 1f),
-                0f,
-                Random.Range(-1f, 1f)
-            ).normalized;
-
-            rb.AddForce(randomDirection * horizontalForce, ForceMode.Impulse);
-            rb.AddForce(Vector3.down * fallSpeedBoost, ForceMode.Impulse);
+            behaviour.Initialize(targetPosition, fallSpeed, marker);
         }
-
-        Debug.Log("Asteroid spawned at " + spawnPosition);
     }
 }
