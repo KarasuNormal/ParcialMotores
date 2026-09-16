@@ -18,7 +18,7 @@ public class WallMovement : MonoBehaviour
 
     private Transform lastWallJumped;
     private CharacterControllerCs _controller;
-    private Animator _animator;
+    //private Animator _animator;
 
     private RaycastHit hitRight;
     private RaycastHit hitLeft;
@@ -30,7 +30,7 @@ public class WallMovement : MonoBehaviour
     private void Start()
     {
         _controller = GetComponent<CharacterControllerCs>();
-        _animator = GetComponent<Animator>();
+        //_animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -61,7 +61,7 @@ public class WallMovement : MonoBehaviour
         else
         {
             _controller.SetWallRun(false, Vector3.zero, 0f);
-            if (_animator != null) _animator.SetBool("IsWallRunning", false);
+            //if (_animator != null) _animator.SetBool("IsWallRunning", false);
         }
     }
 
@@ -90,12 +90,12 @@ public class WallMovement : MonoBehaviour
             }
 
             _controller.SetWallRun(true, wallRunDirection, wallRunSpeed);
-            if (_animator != null) _animator.SetBool("IsWallRunning", true);
+            //if (_animator != null) _animator.SetBool("IsWallRunning", true);
         }
         else
         {
             _controller.SetWallRun(false, Vector3.zero, 0f);
-            if (_animator != null) _animator.SetBool("IsWallRunning", false);
+            //if (_animator != null) _animator.SetBool("IsWallRunning", false);
         }
     }
 
@@ -129,7 +129,7 @@ public class WallMovement : MonoBehaviour
                 Vector3 jumpDirection = (wallNormal * wallJumpSideForce) + (Vector3.up * wallJumpUpForce);
                 _controller.ApplyWallJumpImpulse(jumpDirection);
 
-                if (_animator != null) _animator.SetTrigger("WallJumpTrigger");
+                //if (_animator != null) _animator.SetTrigger("WallJumpTrigger");
             }
         }
     }

@@ -5,6 +5,10 @@ public class VictoryTrigger : MonoBehaviour
 {
     [SerializeField] private GameObject victoryPanel;
     private DefeatTimer defeatTimer;
+    private void Start()
+    {
+        defeatTimer = FindFirstObjectByType<DefeatTimer>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
