@@ -27,9 +27,8 @@ public class DefeatTimer : MonoBehaviour
 
         if (timeRemaining <= 0)
         {
-            defeatTriggered = true;
+            Defeat();
             Debug.Log("DEFEAT: time ran out, you didn't reach the helicopter.");
-            defeatPanel.SetActive(true);
 
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
@@ -62,8 +61,14 @@ public class DefeatTimer : MonoBehaviour
     }
 
     public void StopTimer()
-{
-    defeatTriggered = true;
-}
+    {
+        defeatTriggered = true;
+    }   
+
+    public void Defeat()
+    {
+        defeatTriggered = true;
+        defeatPanel.SetActive(true); 
+    }
 
 }

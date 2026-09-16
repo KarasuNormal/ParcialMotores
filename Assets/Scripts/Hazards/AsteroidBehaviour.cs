@@ -5,9 +5,6 @@ public class AsteroidBehaviour : MonoBehaviour
 {
     private GameObject warningMarker;
 
-    [SerializeField] private GameObject defeatPanel;
-    private DefeatTimer defeatTimer;
-
     public void Initialize(Vector3 targetPosition, float speed, GameObject marker)
     {
         warningMarker = marker;
@@ -22,24 +19,29 @@ public class AsteroidBehaviour : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
         if (warningMarker != null)
         {
             Destroy(warningMarker);
         }
 
-        if (other.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
-            defeatTimer.StopTimer();
-            Debug.Log("DEFEAT! Asteroid kill you.");
-            defeatPanel.SetActive(true);
+            Debug.Log("DEFEAT! Asteroid killed you.");
+
+            DefeatTimer timer = FindFirstObjectByType<DefeatTimer>();
+            if (timer != null)
+            {
+                timer.Defeat();
+            }
 
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
 
-            CharacterControllerCs controller = other.GetComponent<CharacterControllerCs>();
-            if (controller != null) {
+            CharacterControllerCs controller = collision.gameObject.GetComponent<CharacterControllerCs>();
+            if (controller != null)
+            {
                 controller.enabled = false;
             }
         }

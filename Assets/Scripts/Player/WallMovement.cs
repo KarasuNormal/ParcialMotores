@@ -77,7 +77,7 @@ public class WallMovement : MonoBehaviour
     private void WallRun()
     {
         bool isAirborne = !_controller.IsGrounded;
-        bool isKeyHeld = Keyboard.current != null && Keyboard.current.xKey.isPressed;
+        bool isKeyHeld = Mouse.current != null && Mouse.current.rightButton.isPressed;
 
         if (isAirborne && isKeyHeld && (wallOnRight || wallOnLeft))
         {
@@ -101,7 +101,7 @@ public class WallMovement : MonoBehaviour
 
     private void WallJump()
     {
-        if (Keyboard.current != null && Keyboard.current.yKey.wasPressedThisFrame)
+        if (Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame)
         {
             Transform currentWall = null;
             Vector3 wallNormal = Vector3.zero;
