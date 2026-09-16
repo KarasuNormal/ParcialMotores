@@ -5,7 +5,7 @@ using CharacterScripts;
 public class WallMovement : MonoBehaviour
 {
     [Header("Detección de Paredes")]
-    [SerializeField] private float wallDetectionDistance = 1.5f;
+    [SerializeField] private float wallDetectionDistance = 0.8f;
     [SerializeField] private string wallTag = "Wall";
     [SerializeField] private float raycastHeightOffset = 1.2f;
 
@@ -18,7 +18,6 @@ public class WallMovement : MonoBehaviour
 
     private Transform lastWallJumped;
     private CharacterControllerCs _controller;
-    //private Animator _animator;
 
     private RaycastHit hitRight;
     private RaycastHit hitLeft;
@@ -30,14 +29,10 @@ public class WallMovement : MonoBehaviour
     private void Start()
     {
         _controller = GetComponent<CharacterControllerCs>();
-        //_animator = GetComponent<Animator>();
     }
 
     private void Update()
     {
-        // Nota: Como 'grounded' ahora es privado en el controlador, 
-        // necesitamos agregar una propiedad pública 'IsGrounded' allá o usar un método.
-        // Por ahora asumimos que agregaste un getter público en CharacterControllerCs.
         if (_controller.IsGrounded)
         {
             lastWallJumped = null;
@@ -61,7 +56,6 @@ public class WallMovement : MonoBehaviour
         else
         {
             _controller.SetWallRun(false, Vector3.zero, 0f);
-            //if (_animator != null) _animator.SetBool("IsWallRunning", false);
         }
     }
 
@@ -77,9 +71,18 @@ public class WallMovement : MonoBehaviour
     private void WallRun()
     {
         bool isAirborne = !_controller.IsGrounded;
-        bool isKeyHeld = Mouse.current != null && Mouse.current.rightButton.isPressed;
 
-        if (isAirborne && isKeyHeld && (wallOnRight || wallOnLeft))
+        bool r2Pressed = false;
+        if (Gamepad.current != null)
+        {
+            r2Pressed = Gamepad.current.rightTrigger.isPressed;
+        }
+        else if (Keyboard.current != null)
+        {
+            r2Pressed = Keyboard.current.leftShiftKey.isPressed;
+        }
+
+        if (isAirborne && r2Pressed && (wallOnRight || wallOnLeft))
         {
             Vector3 wallNormal = wallOnRight ? hitRight.normal : hitLeft.normal;
             Vector3 wallRunDirection = Vector3.Cross(wallNormal, Vector3.up);
@@ -90,18 +93,26 @@ public class WallMovement : MonoBehaviour
             }
 
             _controller.SetWallRun(true, wallRunDirection, wallRunSpeed);
-            //if (_animator != null) _animator.SetBool("IsWallRunning", true);
         }
         else
         {
             _controller.SetWallRun(false, Vector3.zero, 0f);
-            //if (_animator != null) _animator.SetBool("IsWallRunning", false);
         }
     }
 
     private void WallJump()
     {
-        if (Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame)
+        bool xPressed = false;
+        if (Gamepad.current != null)
+        {
+            xPressed = Gamepad.current.buttonSouth.wasPressedThisFrame;
+        }
+        else if (Keyboard.current != null)
+        {
+            xPressed = Keyboard.current.spaceKey.wasPressedThisFrame;
+        }
+
+        if (xPressed)
         {
             Transform currentWall = null;
             Vector3 wallNormal = Vector3.zero;
@@ -128,8 +139,6 @@ public class WallMovement : MonoBehaviour
 
                 Vector3 jumpDirection = (wallNormal * wallJumpSideForce) + (Vector3.up * wallJumpUpForce);
                 _controller.ApplyWallJumpImpulse(jumpDirection);
-
-                //if (_animator != null) _animator.SetTrigger("WallJumpTrigger");
             }
         }
     }
