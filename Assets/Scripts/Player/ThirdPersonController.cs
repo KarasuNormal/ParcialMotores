@@ -125,7 +125,15 @@ namespace StarterAssets
             }
         }
 
+    private int _animIDJumpPhase;
+    private int _animIDRoll;
+    private bool _wasGrounded = true;
 
+    [Header("Salto y Roll")]
+    [Tooltip("Velocidad de caída (negativa) mínima para hacer la vuelta carnero")]
+    public float RollFallSpeed = -8f;
+    [Tooltip("Velocidad de caída (negativa) que equivale a JumpPhase = 1")]
+    public float FallPhaseSpeed = -15f;
         private void Awake()
         {
             // get a reference to our main camera
@@ -153,6 +161,8 @@ namespace StarterAssets
             // reset our timeouts on start
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
+            _animIDJumpPhase = Animator.StringToHash("JumpPhase");
+            _animIDRoll = Animator.StringToHash("Roll");
         }
 
         private void Update()
@@ -161,6 +171,7 @@ namespace StarterAssets
 
             JumpAndGravity();
             GroundedCheck();
+            UpdateJumpPhase();
             Move();
         }
 
@@ -180,18 +191,48 @@ namespace StarterAssets
 
         private void GroundedCheck()
         {
-            // set sphere position, with offset
-            Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - GroundedOffset,
-                transform.position.z);
-            Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers,
-                QueryTriggerInteraction.Ignore);
+            _wasGrounded = Grounded;
 
-            // update animator if using character
+            Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z);
+            Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers, QueryTriggerInteraction.Ignore);
+
             if (_hasAnimator)
             {
                 _animator.SetBool(_animIDGrounded, Grounded);
+
+                // Aterrizó recién y cayó con suficiente velocidad
+                if (!_wasGrounded && Grounded && _verticalVelocity <= RollFallSpeed)
+                {
+                    _animator.SetTrigger(_animIDRoll);
+                }
             }
         }
+
+        private void UpdateJumpPhase()
+        {
+            if (!_hasAnimator) return;
+
+            float phase = 0f;
+
+            if (!Grounded)
+            {
+                // Velocidad vertical con la que se despega
+                float jumpVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
+
+                if (_verticalVelocity > 0f)
+                {
+                    // Subiendo: 0 -> 0.5
+                    phase = Mathf.InverseLerp(jumpVelocity, 0f, _verticalVelocity) * 0.5f;
+                }
+                else
+                {
+                // Cayendo: 0.5 -> 1
+                phase = 0.5f + Mathf.InverseLerp(0f, FallPhaseSpeed, _verticalVelocity) * 0.5f;
+                }
+            }
+
+        _animator.SetFloat(_animIDJumpPhase, phase);
+        }        
 
         private void CameraRotation()
         {
