@@ -4,7 +4,7 @@ using UnityEngine;
 public class Void : MonoBehaviour
 {
     [SerializeField] private GameObject defeatPanel;
-   private DefeatTimer defeatTimer;
+    private DefeatTimer defeatTimer;
 
     private void Start()
     {
@@ -25,7 +25,7 @@ public class Void : MonoBehaviour
             if (controller != null)
             {
                 controller.enabled = false;
-                
+
             }
         }
     }
