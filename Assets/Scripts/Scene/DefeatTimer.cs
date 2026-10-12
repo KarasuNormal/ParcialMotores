@@ -1,15 +1,19 @@
+using System;
 using UnityEngine;
-using TMPro;
 using CharacterScripts;
 
 public class DefeatTimer : MonoBehaviour
 {
+    public static event Action<int, float> OnTimeChanged;
+    // El "aviso" del timer: (segundos que quedan, fraccion de tiempo que queda de 0 a 1).
+    // El timer no sabe quien lo escucha: la UI se suscribe y se actualiza sola
+
     [Header("Configuration")]
     [SerializeField] private float timeLimit = 600f;
     [SerializeField] private GameObject defeatPanel;
-    [SerializeField] private TextMeshProUGUI timeText;
 
     private float timeRemaining;
+    private int lastSecondNotified = -1;
     private bool defeatTriggered = false;
 
     private void Start()
@@ -23,7 +27,7 @@ public class DefeatTimer : MonoBehaviour
 
         timeRemaining -= Time.deltaTime;
 
-        UpdateText();
+        NotifyTime();
 
         if (timeRemaining <= 0)
         {
@@ -50,25 +54,25 @@ public class DefeatTimer : MonoBehaviour
         }
     }
 
-    private void UpdateText()
+    private void NotifyTime()
     {
-        if (timeText == null) return;
+        int seconds = Mathf.FloorToInt(Mathf.Max(timeRemaining, 0f));
 
-        float displayedTime = Mathf.Max(timeRemaining, 0);
-        int minutes = Mathf.FloorToInt(displayedTime / 60);
-        int seconds = Mathf.FloorToInt(displayedTime % 60);
-        timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        if (seconds == lastSecondNotified) return;
+        // Solo avisamos cuando cambia el segundo, no en cada frame
+
+        lastSecondNotified = seconds;
+        OnTimeChanged?.Invoke(seconds, Mathf.Clamp01(timeRemaining / timeLimit));
     }
 
     public void StopTimer()
     {
         defeatTriggered = true;
-    }   
+    }
 
     public void Defeat()
     {
         defeatTriggered = true;
-        defeatPanel.SetActive(true); 
+        defeatPanel.SetActive(true);
     }
-
 }
