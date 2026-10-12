@@ -1,22 +1,24 @@
+using System;
 using UnityEngine;
 
 public class ControlsArea : MonoBehaviour
 {
-    [SerializeField] private GameObject controlsPanel;
+    public static event Action<TutorialType> OnTutorialEntered;
+    public static event Action<TutorialType> OnTutorialExited;
+    // Los "avisos" que manda la zona. No sabe quien los escucha:
+    // la UI se suscribe y reacciona sola (patron Observer)
+
+    [SerializeField] private TutorialType tutorialType;
+    // Que tutorial corresponde a esta zona (se elige en el Inspector)
 
     private bool tutorialShown;
-
-    private void Start()
-    {
-        controlsPanel.SetActive(false);
-    }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") && !tutorialShown)
         {
-            controlsPanel.SetActive(true);
             tutorialShown = true;
+            OnTutorialEntered?.Invoke(tutorialType);
         }
     }
 
@@ -24,7 +26,7 @@ public class ControlsArea : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            controlsPanel.SetActive(false);
+            OnTutorialExited?.Invoke(tutorialType);
         }
     }
 }
