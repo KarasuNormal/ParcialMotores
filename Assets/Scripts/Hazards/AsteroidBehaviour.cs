@@ -30,11 +30,6 @@ public class AsteroidBehaviour : MonoBehaviour
         {
             Debug.Log("DEFEAT! Asteroid killed you.");
 
-            DefeatTimer timer = FindFirstObjectByType<DefeatTimer>();
-            if (timer != null)
-            {
-                timer.Defeat();
-            }
 
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
@@ -44,6 +39,9 @@ public class AsteroidBehaviour : MonoBehaviour
             {
                 controller.enabled = false;
             }
+
+            GameEvents.RaiseDefeat();
+            // Avisamos que se perdio. La UI y el timer reaccionan solos
         }
 
         Destroy(gameObject);

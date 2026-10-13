@@ -3,38 +3,26 @@ using CharacterScripts;
 
 public class VictoryTrigger : MonoBehaviour
 {
-    [SerializeField] private GameObject victoryPanel;
-    private DefeatTimer defeatTimer;
-    private void Start()
-    {
-        defeatTimer = FindFirstObjectByType<DefeatTimer>();
-    }
+    private bool triggered;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (triggered || !other.CompareTag("Player")) return;
+
+        triggered = true;
+        Debug.Log("VICTORY! The player reached the helicopter.");
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        CharacterControllerCs controller = other.GetComponent<CharacterControllerCs>();
+        if (controller != null)
         {
-            Debug.Log("VICTORY! The player reached the helicopter.");
-            victoryPanel.SetActive(true);
-
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-
-            if (defeatTimer != null)
-            {
-                defeatTimer.StopTimer();
-            }
-
-            CharacterControllerCs controller = other.GetComponent<CharacterControllerCs>();
-            if (controller != null)
-            {
-                controller.enabled = false;
-                Debug.Log("Player control DISABLED (Victory).");
-            }
-            else
-            {
-                Debug.Log("ThirdPersonController not found to disable.");
-            }
+            controller.enabled = false;
+            Debug.Log("Player control DISABLED (Victory).");
         }
+
+        GameEvents.RaiseVictory();
+        // Avisamos que se gano. La UI y el timer reaccionan solos
     }
 }

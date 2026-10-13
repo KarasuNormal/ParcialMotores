@@ -15,6 +15,26 @@ public class AsteroidSpawner : MonoBehaviour
     private float timer;
     private Transform player;
 
+    private bool gameOver;
+
+    private void OnEnable()
+    {
+        GameEvents.OnVictory += StopSpawning;
+        GameEvents.OnDefeat += StopSpawning;
+    }
+
+    private void OnDisable()
+    {
+        GameEvents.OnVictory -= StopSpawning;
+        GameEvents.OnDefeat -= StopSpawning;
+    }
+
+    private void StopSpawning()
+    {
+        gameOver = true;
+    }
+
+
     private void Start()
     {
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
