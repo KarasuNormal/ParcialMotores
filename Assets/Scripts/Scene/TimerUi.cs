@@ -86,11 +86,7 @@ public class TimerUI : MonoBehaviour
         int secs = seconds % 60;
 
         string colon = ":";
-        if (currentState == TimerState.Normal && secs % 2 == 1)
-        {
-            colon = "<alpha=#59>:<alpha=#FF>";
-            // En estado normal, los dos puntos "parpadean" cada segundo
-        }
+
 
         return minutes.ToString("00") + colon + secs.ToString("00");
     }
