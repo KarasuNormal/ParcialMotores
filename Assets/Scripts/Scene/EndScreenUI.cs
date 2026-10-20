@@ -1,5 +1,6 @@
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class EndScreenUI : MonoBehaviour
@@ -23,6 +24,11 @@ public class EndScreenUI : MonoBehaviour
     // Opcional: una imagen roja a pantalla completa para el "golpe" de la derrota
     [SerializeField] private CanvasGroup[] hudElements;
     // Lo que se esconde al terminar: el tutorial y el cronometro
+
+    [Header("Despues de ganar")]
+    [SerializeField] private string creditsScene = "Credits";
+    [SerializeField] private float victoryToCreditsDelay = 4f;
+    // Segundos que se ve "Lo lograste" antes de pasar a los creditos
 
     private bool shown;
     private Vector2 victoryTitleBase;
@@ -96,7 +102,7 @@ public class EndScreenUI : MonoBehaviour
             sequence.Append(detail.DOFade(1f, 0.25f));
         }
 
-        sequence.OnComplete(() =>
+        sequence.AppendCallback(() =>
         {
             screen.panel.interactable = true;
             screen.panel.blocksRaycasts = true;
@@ -173,5 +179,9 @@ public class EndScreenUI : MonoBehaviour
 
         // 4. Subtitulo y boton, de a uno
         AppendDetails(sequence, victory);
+
+        // 5. Despues de unos segundos, pasamos a los creditos
+        sequence.AppendInterval(victoryToCreditsDelay);
+        sequence.AppendCallback(() => SceneManager.LoadScene(creditsScene));
     }
 }
