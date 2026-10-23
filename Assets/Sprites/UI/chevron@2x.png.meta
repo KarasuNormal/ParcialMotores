@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 624db05c3937da24eaa63ec47e43d171
+=======
+guid: 9f8db65f8aae26946a82e807e44756d1
+>>>>>>> helicopter
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -72,7 +76,11 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
+<<<<<<< HEAD
     textureCompression: 0
+=======
+    textureCompression: 1
+>>>>>>> helicopter
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
