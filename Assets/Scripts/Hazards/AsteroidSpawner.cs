@@ -50,7 +50,7 @@ public class AsteroidSpawner : MonoBehaviour
 
     private void Update()
     {
-        if (player == null) return;
+        if (player == null || gameOver) return;
 
         timer += Time.deltaTime;
 
