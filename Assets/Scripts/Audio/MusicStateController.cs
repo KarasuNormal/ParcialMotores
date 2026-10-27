@@ -45,6 +45,18 @@ public class MusicStateController : MonoBehaviour
         if (Instance == this) Instance = null;
     }
 
+    private void OnEnable()
+    {
+        // Escuchamos la derrota, igual que la UI y el timer
+        GameEvents.OnDefeat += PlayDefeat;
+    }
+
+    private void OnDisable()
+    {
+        // Nos desuscribimos al salir de la escena, para no dejar el evento colgado
+        GameEvents.OnDefeat -= PlayDefeat;
+    }
+
     private IEnumerator Start()
     {
         // Arranca en silencio y entra la musica de exploracion con un fade
