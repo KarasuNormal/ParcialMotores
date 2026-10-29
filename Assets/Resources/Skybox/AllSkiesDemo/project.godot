@@ -1,0 +1,13 @@
+; Skybox Sampler - all 9 skies on test geometry. Open this folder in Godot 4.5+ and press F5.
+config_version=5
+
+[application]
+
+config/name="Skybox Sampler - All Skies Demo"
+run/main_scene="res://addons/skybox_sampler/demo/demo.tscn"
+config/features=PackedStringArray("4.5", "GL Compatibility")
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
