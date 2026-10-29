@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3429383843730749194}
   - component: {fileID: 4165845615331243407}
   - component: {fileID: 7572917515660260053}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Concrete Base (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 2464038240323316273}
   - component: {fileID: 4030239660274635789}
   - component: {fileID: 2049564110230716591}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Outdoor AC Unit (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -191,7 +191,7 @@ GameObject:
   - component: {fileID: 1470676351607695835}
   - component: {fileID: 4627368246442130577}
   - component: {fileID: 7855294969245059949}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cooling Fan (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -281,7 +281,7 @@ GameObject:
   - component: {fileID: 958232329844060396}
   - component: {fileID: 6738161706411958869}
   - component: {fileID: 5361940347529939175}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Concrete Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -369,8 +369,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4920226446471542170}
-  - component: {fileID: -5138372745181426288}
-  m_Layer: 0
+  - component: {fileID: 3039658277541306425}
+  m_Layer: 3
   m_Name: AC_unit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -396,7 +396,7 @@ Transform:
   - {fileID: 2464038240323316273}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &-5138372745181426288
+--- !u!65 &3039658277541306425
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -415,5 +415,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5, y: 3.4759521, z: 1.5355988}
-  m_Center: {x: 8.9999695, y: 5.237976, z: 15.732203}
+  m_Size: {x: 4.6703796, y: 3.1959076, z: 1.4730835}
+  m_Center: {x: 9.050919, y: 5.3903275, z: 15.691071}
