@@ -51,7 +51,6 @@ namespace CharacterScripts
         [Tooltip("If the character is grounded or not.")]
         [SerializeField] private bool grounded = true;
 
-        // Propiedad pública única para que WallMovement lea el estado de forma segura
         public bool IsGrounded => grounded;
 
         [Tooltip("Useful for rough ground")]
@@ -79,7 +78,6 @@ namespace CharacterScripts
         [Tooltip("For locking the camera position on all axis")]
         [SerializeField] private bool lockCameraPosition = false;
 
-        // Internal State Variables
         private float _cinemachineTargetYaw;
         private float _cinemachineTargetPitch;
 
@@ -110,10 +108,12 @@ namespace CharacterScripts
 #if ENABLE_INPUT_SYSTEM 
         private PlayerInput _playerInput;
 #endif
+
         private Animator _animator;
         private CharacterController _controller;
         private StarterAssetsInputs _input;
         private GameObject _mainCamera;
+        private PlayerHealth _playerHealth;
 
         private const float _threshold = 0.01f;
         private bool _hasAnimator;
@@ -145,6 +145,8 @@ namespace CharacterScripts
             _hasAnimator = TryGetComponent(out _animator);
             _controller = GetComponent<CharacterController>();
             _input = GetComponent<StarterAssetsInputs>();
+            _playerHealth = GetComponent<PlayerHealth>();
+
 #if ENABLE_INPUT_SYSTEM 
             _playerInput = GetComponent<PlayerInput>();
 #else
@@ -159,6 +161,9 @@ namespace CharacterScripts
 
         private void Update()
         {
+            if (_playerHealth != null && _playerHealth.IsDead)
+                return;
+
             _hasAnimator = TryGetComponent(out _animator);
 
             JumpAndGravity();
