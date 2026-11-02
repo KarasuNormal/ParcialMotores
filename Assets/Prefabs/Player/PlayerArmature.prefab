@@ -173,6 +173,10 @@ GameObject:
   - component: {fileID: 8238588923639152052}
   - component: {fileID: 5254663644408231020}
   - component: {fileID: 6581630864301991845}
+  - component: {fileID: 815955669807922541}
+  - component: {fileID: 7890504633753504623}
+  - component: {fileID: 4352188187925557357}
+  - component: {fileID: 8123902943442776868}
   m_Layer: 8
   m_Name: PlayerArmature
   m_TagString: Player
@@ -188,9 +192,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1271772813350879553}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5721532532055092032}
@@ -258,31 +262,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26e54e5a728a9234ab24fcf1460ed8a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 2.5
-  SprintSpeed: 6
-  RotationSmoothTime: 0.12
-  SpeedChangeRate: 15.04
-  AudioFootsteps: {fileID: 2334173056626531412}
-  LandingAudio: {fileID: 8948518571687951432}
-  AudioFoley: {fileID: 642977345071385568}
-  LandingAudioClip: {fileID: 0}
-  FootstepAudioClips: []
-  FootstepAudioVolume: 0.3
-  JumpHeight: 1.88
-  Gravity: -15
-  JumpTimeout: 0.3
-  FallTimeout: 0.15
-  Grounded: 1
-  GroundedOffset: -0.14
-  GroundedRadius: 0.28
-  GroundLayers:
+  moveSpeed: 8
+  sprintSpeed: 18
+  rotationSmoothTime: 0.12
+  speedChangeRate: 15
+  audioFootsteps: {fileID: 2334173056626531412}
+  landingAudio: {fileID: 8948518571687951432}
+  audioFoley: {fileID: 642977345071385568}
+  landingAudioClip: {fileID: 0}
+  footstepAudioClips: []
+  footstepAudioVolume: 0.3
+  jumpHeight: 2.5
+  gravity: -15
+  jumpTimeout: 0.3
+  fallTimeout: 0.15
+  grounded: 1
+  groundedOffset: -0.14
+  groundedRadius: 0.28
+  groundLayers:
     serializedVersion: 2
-    m_Bits: 1
-  CinemachineCameraTarget: {fileID: 5130834817896480843}
-  TopClamp: 70
-  BottomClamp: -30
-  CameraAngleOverride: 0
-  LockCameraPosition: 0
+    m_Bits: 8
+  cinemachineCameraTarget: {fileID: 5130834817896480843}
+  topClamp: 70
+  bottomClamp: -30
+  cameraAngleOverride: 0
+  lockCameraPosition: 0
+  wallRunGravityDamping: 5
 --- !u!114 &8238588923639152052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -316,6 +321,7 @@ MonoBehaviour:
   look: {x: 0, y: 0}
   jump: 0
   sprint: 0
+  interact: 0
   analogMovement: 0
   cursorLocked: 1
   cursorInputForLook: 1
@@ -417,6 +423,155 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &815955669807922541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1271772813350879553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6adc30f00f627b04eaf559d348e84958, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WallMovement
+  wallDetectionDistance: 1
+  wallTag: Wall
+  raycastHeightOffset: 1.2
+  wallJumpSideForce: 2
+  wallJumpUpForce: 15
+  wallRunSpeed: 15
+--- !u!82 &7890504633753504623
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1271772813350879553}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: -5319642856119885499, guid: 1352e50c5e852da43a29dd17c1f17877, type: 2}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: 2d32da17997306e4cb8c819cddc1ae0f, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &4352188187925557357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1271772813350879553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab3e51db54804ad4f8cbdd4fa1caa7a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
+  maxHealth: 3
+  invulnerabilityTime: 0.5
+--- !u!114 &8123902943442776868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1271772813350879553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 366fd2ec137732c4b8c024aa32c47ab7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  breathingSource: {fileID: 7890504633753504623}
+  walkSpeed: 1.5
+  runSpeed: 6
+  minVolume: 0.12
+  maxVolume: 0.5
+  minPitch: 0.9
+  maxPitch: 1.25
+  smoothSpeed: 3
 --- !u!1 &1354652752566984329
 GameObject:
   m_ObjectHideFlags: 0

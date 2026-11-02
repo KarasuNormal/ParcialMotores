@@ -24,7 +24,7 @@ public class Generator : MonoBehaviour
 
             Debug.Log("Generator activated: " + gameObject.name);
 
-            Destroy(gameObject);
+        
         }
     }
 
