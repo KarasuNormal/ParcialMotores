@@ -16,6 +16,10 @@ public class WallMovement : MonoBehaviour
     [Header("Wall Run")]
     [SerializeField] private float wallRunSpeed = 6f;
 
+    [Header("Audio - Bloque C")]
+    [SerializeField] private AudioSource sfxWallJump;
+    [SerializeField] private AudioSource sfxWallRun;
+
     private Transform lastWallJumped;
     private CharacterControllerCs _controller;
     private Animator _animator;
@@ -58,6 +62,7 @@ public class WallMovement : MonoBehaviour
         else
         {
             _controller.SetWallRun(false, Vector3.zero, 0f);
+            SetWallRunSound(false); // Bloque C
 
             if (_animator != null) _animator.SetBool("IsWallRunning", false);
         }
@@ -97,6 +102,7 @@ public class WallMovement : MonoBehaviour
             }
 
             _controller.SetWallRun(true, wallRunDirection, wallRunSpeed);
+            SetWallRunSound(true); // Bloque C
             if (_animator != null)
             {
                 _animator.SetBool("IsWallRunning", true);
@@ -106,6 +112,7 @@ public class WallMovement : MonoBehaviour
         else
         {
             _controller.SetWallRun(false, Vector3.zero, 0f);
+            SetWallRunSound(false); // Bloque C
             if (_animator != null) _animator.SetBool("IsWallRunning", false);
         }
     }
@@ -149,6 +156,7 @@ public class WallMovement : MonoBehaviour
 
                 Vector3 jumpDirection = (wallNormal * wallJumpSideForce) + (Vector3.up * wallJumpUpForce);
                 _controller.ApplyWallJumpImpulse(jumpDirection);
+                if (sfxWallJump != null) sfxWallJump.Play(); // Bloque C
 
                 if (_animator != null)
                 {
@@ -157,5 +165,14 @@ public class WallMovement : MonoBehaviour
                 }
             }
         }
+    }
+
+    // Bloque C: el sonido sigue al estado de wall run, no a cada frame
+    private void SetWallRunSound(bool active)
+    {
+        if (sfxWallRun == null) return;
+
+        if (active && !sfxWallRun.isPlaying) sfxWallRun.Play();
+        else if (!active && sfxWallRun.isPlaying) sfxWallRun.Stop();
     }
 }

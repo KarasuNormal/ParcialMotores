@@ -6,6 +6,9 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private int maxHealth = 3;
     [SerializeField] private float invulnerabilityTime = 0.5f;
 
+    [Header("Audio - Bloque C")]
+    [SerializeField] private AudioSource sfxDamage;
+
     private int currentHealth;
     private float nextDamageTime;
     private bool isDead;
@@ -25,6 +28,8 @@ public class PlayerHealth : MonoBehaviour
 
         currentHealth -= damage;
         nextDamageTime = Time.time + invulnerabilityTime;
+
+        if (sfxDamage != null) sfxDamage.Play(); // Bloque C
 
         Debug.Log("Player health: " + currentHealth);
 

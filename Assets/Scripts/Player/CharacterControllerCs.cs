@@ -29,9 +29,15 @@ namespace CharacterScripts
         [SerializeField] private AudioSource audioFootsteps;
         [SerializeField] private AudioSource landingAudio;
         [SerializeField] private AudioSource audioFoley;
+        [SerializeField] private AudioSource sfxJump; // Bloque C - Salto
+        [Tooltip("Bloque C: velocidad vertical minima (negativa) al tocar el piso para que suene el aterrizaje")]
+        [SerializeField] private float landingMinFallSpeed = -4f;
         [SerializeField] private AudioClip landingAudioClip;
         [SerializeField] private AudioClip[] footstepAudioClips;
+        // Campo del Starter Assets que el codigo no usa (la escena guarda un valor). Se silencia el aviso CS0414.
+#pragma warning disable 0414
         [Range(0, 1)][SerializeField] private float footstepAudioVolume = 0.5f;
+#pragma warning restore 0414
 
         [Space(10)]
         [Tooltip("The height the player can jump")]
@@ -188,7 +194,15 @@ namespace CharacterScripts
         private void GroundedCheck()
         {
             Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - groundedOffset, transform.position.z);
+            bool wasGrounded = grounded; // Bloque C
             grounded = Physics.CheckSphere(spherePosition, groundedRadius, groundLayers, QueryTriggerInteraction.Ignore);
+
+            // Bloque C: aterrizaje por codigo. Las animaciones de Mixamo no traen el evento OnLand,
+            // asi que detectamos el paso de "en el aire" a "en el piso" viniendo de una caida.
+            if (!wasGrounded && grounded && _verticalVelocity < landingMinFallSpeed)
+            {
+                PlayLanding();
+            }
 
             if (_hasAnimator)
             {
@@ -296,6 +310,9 @@ namespace CharacterScripts
                 {
                     _verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
 
+                    // Bloque C: isPlaying evita que suene dos veces si el salto se evalua en dos frames seguidos
+                    if (sfxJump != null && !sfxJump.isPlaying) sfxJump.Play();
+
                     if (_hasAnimator)
                     {
                         _animator.SetBool(_animIDJump, true);
@@ -371,8 +388,15 @@ namespace CharacterScripts
         {
             if (animationEvent.animatorClipInfo.weight > 0.5f)
             {
-                if (landingAudio != null) landingAudio.Play();
+                PlayLanding(); // Bloque C
             }
+        }
+
+        // Bloque C: un solo lugar reproduce el aterrizaje; isPlaying evita que suene doble
+        // si el evento de animacion y la deteccion por codigo coinciden en el mismo momento
+        private void PlayLanding()
+        {
+            if (landingAudio != null && !landingAudio.isPlaying) landingAudio.Play();
         }
     }
 }
