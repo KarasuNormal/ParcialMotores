@@ -5,11 +5,14 @@ public class Void : MonoBehaviour
 {
     private bool triggered;
 
+    [SerializeField] private AudioSource sfxFall; // Bloque C - grito de caida (2D, en el jugador)
+
     private void OnTriggerEnter(Collider other)
     {
         if (triggered || !other.CompareTag("Player")) return;
 
         triggered = true;
+        if (sfxFall != null) sfxFall.Play(); // Bloque C
         Debug.Log("DEFEAT! The player fell into the void.");
 
         Cursor.lockState = CursorLockMode.None;

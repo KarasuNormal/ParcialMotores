@@ -1,0 +1,6 @@
+[gd_resource type="PanoramaSkyMaterial" load_steps=2 format=3]
+
+[ext_resource type="Texture2D" path="res://addons/alien_skyboxes/panoramas/12_tidally_locked_twilight.png" id="1"]
+
+[resource]
+panorama = ExtResource("1")

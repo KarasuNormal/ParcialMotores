@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3489782801299548147}
   - component: {fileID: 7444057158202066815}
   - component: {fileID: 5471562698131818105}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cooling Fan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 4357447119409062951}
   - component: {fileID: 25103806742482905}
   - component: {fileID: 143952389876329451}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wall Mount Bracket
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -190,7 +190,7 @@ GameObject:
   m_Component:
   - component: {fileID: 502513360797655336}
   - component: {fileID: -3538425943250462435}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Outdoor_AC_Unit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -248,7 +248,7 @@ GameObject:
   - component: {fileID: 8456542205578521575}
   - component: {fileID: 5556534545830408863}
   - component: {fileID: 7131835433665398049}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wall Mount Bracket (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -338,7 +338,7 @@ GameObject:
   - component: {fileID: 6759607937628088660}
   - component: {fileID: 292734393758335524}
   - component: {fileID: 8933234752427806351}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Outdoor AC Unit
   m_TagString: Untagged
   m_Icon: {fileID: 0}

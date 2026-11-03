@@ -106,7 +106,6 @@ public class EndScreenUI : MonoBehaviour
         {
             screen.panel.interactable = true;
             screen.panel.blocksRaycasts = true;
-            // Recien ahora se pueden apretar los botones
         });
     }
 

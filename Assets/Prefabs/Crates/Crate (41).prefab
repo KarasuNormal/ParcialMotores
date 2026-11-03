@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 567784459767992386}
   - component: {fileID: 4495751237096337598}
   - component: {fileID: 3688014318693696540}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Face3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 8263961791514270137}
   - component: {fileID: 5077343269017414150}
   - component: {fileID: 7587834902264495397}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Face5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -191,7 +191,7 @@ GameObject:
   - component: {fileID: 4054229764436791207}
   - component: {fileID: 7312056605536596247}
   - component: {fileID: 4776808300662944014}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Face4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -281,7 +281,7 @@ GameObject:
   - component: {fileID: 5820767547375111249}
   - component: {fileID: 6749599826686030521}
   - component: {fileID: 7037481653906569447}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -371,7 +371,7 @@ GameObject:
   - component: {fileID: 7542890675425290148}
   - component: {fileID: 4765345244845362785}
   - component: {fileID: 1327087392625933981}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Face2Cross
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -461,7 +461,7 @@ GameObject:
   - component: {fileID: 1741253016996802249}
   - component: {fileID: 2858423822642154587}
   - component: {fileID: 4546885136014982012}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Face6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -551,7 +551,7 @@ GameObject:
   - component: {fileID: 7179899589790368113}
   - component: {fileID: 7471062589255968242}
   - component: {fileID: 3291139059660493636}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Face6Cross
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -641,7 +641,7 @@ GameObject:
   - component: {fileID: 4085799602572387664}
   - component: {fileID: 7435329027041967394}
   - component: {fileID: 72752207769336362}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Face1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -731,7 +731,7 @@ GameObject:
   - component: {fileID: 8086139167423851653}
   - component: {fileID: 4721744110409675289}
   - component: {fileID: 2944589370554533428}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Face3Cross
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -821,7 +821,7 @@ GameObject:
   - component: {fileID: 1456998190308463269}
   - component: {fileID: 4203086130478498935}
   - component: {fileID: 4721395258482679127}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Face1Cross
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -911,7 +911,7 @@ GameObject:
   - component: {fileID: 3082867225214499585}
   - component: {fileID: 8818147033004898824}
   - component: {fileID: 7608464635890065094}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Face5Cross
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1000,7 +1000,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8134014884308843084}
   - component: {fileID: 4782462584521953289}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Crate (41)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1015,7 +1015,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6747510560335320518}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.13052596, z: -0, w: 0.99144495}
+  m_LocalRotation: {x: 0, y: 0.13052616, z: 0, w: 0.9914449}
   m_LocalPosition: {x: 11.812484, y: 131.7349, z: -366.49728}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1067,7 +1067,7 @@ GameObject:
   - component: {fileID: 5487603835460613675}
   - component: {fileID: 1660803840449379113}
   - component: {fileID: 6113291577938927827}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Face2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1157,7 +1157,7 @@ GameObject:
   - component: {fileID: 7860093587290884948}
   - component: {fileID: 7290806383940973214}
   - component: {fileID: 7522287466574588139}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Face4Cross
   m_TagString: Untagged
   m_Icon: {fileID: 0}

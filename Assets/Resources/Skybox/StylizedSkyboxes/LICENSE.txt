@@ -1,0 +1,33 @@
+STYLIZED SKY SKYBOXES - LICENSE
+
+Copyright (c) 2026 the publisher of this pack.
+
+You may, for a one-time purchase (or for the free sampler, free of charge):
+
+  * use the images in commercial and non-commercial games, apps, tools,
+    videos, streams, films, websites and presentations;
+  * modify, crop, recolour or convert the images for use in your own work;
+  * ship the images (or converted versions of them) inside your own finished
+    product, for example as the sky of a level in a game you sell.
+
+No attribution is required (it is appreciated, never required).
+
+You may NOT:
+
+  * resell, sublicense, share, upload or redistribute the images, the
+    generator output or this pack - original or modified - as stand-alone
+    assets, asset packs, templates, or in any form where others can extract
+    them as skyboxes (for example in an asset store, a public repository of
+    assets, or a game-engine "asset pack");
+  * include the images in a product whose main value is the images themselves
+    (for example another skybox pack);
+  * claim that you created this pack.
+
+Open-source games: you may include the images in a public repository of your
+game only if they are needed to build or run it; you may not license them
+under an open license for others to reuse as assets.
+
+The free sampler may be shared freely in its unmodified zip form.
+
+The pack is provided "as is", without warranty of any kind. The publisher is
+not liable for any damages arising from its use.
