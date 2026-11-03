@@ -5,6 +5,7 @@ public class PlayerHealth : MonoBehaviour
     [Header("Health")]
     [SerializeField] private int maxHealth = 3;
     [SerializeField] private float invulnerabilityTime = 0.5f;
+    [SerializeField] private DamageFeedbackUI damageFeedback;
 
     private int currentHealth;
     private float nextDamageTime;
@@ -24,6 +25,13 @@ public class PlayerHealth : MonoBehaviour
             return;
 
         currentHealth -= damage;
+
+        if (damageFeedback != null)
+        {
+            damageFeedback.ShowDamage();
+            damageFeedback.SetLowHealth(currentHealth == 1);
+        }
+
         nextDamageTime = Time.time + invulnerabilityTime;
 
         Debug.Log("Player health: " + currentHealth);
