@@ -240,8 +240,8 @@ AudioMixerSnapshotController:
     303fd1843f38bdc4cbe1bab3030c3177: 0.6
     cdaf97d8adb0dbc4da85b2f0526ecf52: -7
     1f80554bb2876d94b8de8a2635b04a6b: 3
-    48ad328ca726c6f4f8b503249be8f127: -15.80275
-    937e7cacc4c4ea94997513a4df8dd23b: 2.090601
+    48ad328ca726c6f4f8b503249be8f127: -20
+    937e7cacc4c4ea94997513a4df8dd23b: 0
     9bd7412f0dfc122418977c2fb62de144: 0
     ec1191af7ec7e5746b31a68b6cce2368: -30
   m_TransitionOverrides: {}
@@ -261,9 +261,9 @@ AudioMixerSnapshotController:
     303fd1843f38bdc4cbe1bab3030c3177: 0.6
     cdaf97d8adb0dbc4da85b2f0526ecf52: -80
     1f80554bb2876d94b8de8a2635b04a6b: 3
-    48ad328ca726c6f4f8b503249be8f127: -16
+    48ad328ca726c6f4f8b503249be8f127: -20
     b3f6c79cec9c50e48b39ac7d8b27e2bf: -80
-    937e7cacc4c4ea94997513a4df8dd23b: 2
+    937e7cacc4c4ea94997513a4df8dd23b: 0
     9bd7412f0dfc122418977c2fb62de144: 0
     ec1191af7ec7e5746b31a68b6cce2368: -30
   m_TransitionOverrides: {}
@@ -283,9 +283,9 @@ AudioMixerSnapshotController:
     303fd1843f38bdc4cbe1bab3030c3177: 0.6
     cdaf97d8adb0dbc4da85b2f0526ecf52: -7
     1f80554bb2876d94b8de8a2635b04a6b: 3
-    48ad328ca726c6f4f8b503249be8f127: -16
+    48ad328ca726c6f4f8b503249be8f127: -20
     b3f6c79cec9c50e48b39ac7d8b27e2bf: -80
-    937e7cacc4c4ea94997513a4df8dd23b: 2
+    937e7cacc4c4ea94997513a4df8dd23b: 0
     9bd7412f0dfc122418977c2fb62de144: 0
     ec1191af7ec7e5746b31a68b6cce2368: -30
   m_TransitionOverrides: {}
@@ -333,9 +333,9 @@ AudioMixerSnapshotController:
     303fd1843f38bdc4cbe1bab3030c3177: 0.6
     cdaf97d8adb0dbc4da85b2f0526ecf52: -7
     1f80554bb2876d94b8de8a2635b04a6b: 3
-    48ad328ca726c6f4f8b503249be8f127: -16
+    48ad328ca726c6f4f8b503249be8f127: -20
     b3f6c79cec9c50e48b39ac7d8b27e2bf: -80
-    937e7cacc4c4ea94997513a4df8dd23b: 2
+    937e7cacc4c4ea94997513a4df8dd23b: 0
     9bd7412f0dfc122418977c2fb62de144: 0
     ec1191af7ec7e5746b31a68b6cce2368: -30
   m_TransitionOverrides: {}
