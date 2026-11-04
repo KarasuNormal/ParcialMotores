@@ -1,10 +1,12 @@
+
 using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyChase : MonoBehaviour
 {
+    [Header("Detection")]
     [SerializeField] private Transform player;
-    [SerializeField] private int damage = 1;
+    [SerializeField] private float detectionRange = 8f;
 
     private NavMeshAgent agent;
 
@@ -18,14 +20,25 @@ public class EnemyChase : MonoBehaviour
         if (player == null || !agent.isOnNavMesh)
             return;
 
-        agent.SetDestination(player.position);
+        float distance = Vector3.Distance(
+            transform.position,
+            player.position
+        );
+
+        if (distance <= detectionRange)
+        {
+            agent.isStopped = false;
+            agent.SetDestination(player.position);
+        }
+        else
+        {
+            agent.isStopped = true;
+        }
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnDrawGizmosSelected()
     {
-        PlayerHealth health = other.GetComponentInParent<PlayerHealth>();
-
-        if (health != null)
-            health.TakeDamage(damage);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, detectionRange);
     }
 }
