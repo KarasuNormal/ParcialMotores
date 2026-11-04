@@ -24,6 +24,8 @@ public class GeneratorManager : MonoBehaviour
 
         activatedGenerators++;
 
+        GameEvents.RaiseGeneratorActivated(activatedGenerators, requiredGenerators); // Bloque E: voces
+
         Debug.Log("Generators activated: " +
                   activatedGenerators + "/" + requiredGenerators);
 
@@ -34,6 +36,8 @@ public class GeneratorManager : MonoBehaviour
     private void OpenDoor()
     {
         doorOpened = true;
+
+        GameEvents.RaiseDoorOpened(); // Bloque E: voces
 
         Debug.Log("All generators activated. Destroying door.");
 
