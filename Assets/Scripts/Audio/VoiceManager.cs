@@ -36,6 +36,10 @@ public class VoiceManager : MonoBehaviour
     // Espera un poco al arrancar, para que entre despues del fade de la musica
     [SerializeField] private float pausaEntreLineas = 0.3f;
     [SerializeField] private int segundosAviso = 60;
+    [SerializeField] private float delayPuertaAbierta = 1.5f;
+    // Bloque C: deja sonar primero el SFX de la puerta (deslizamiento) y despues habla la radio
+    [SerializeField] private float delayPrimerGenerador = 0.6f;
+    // Bloque C: deja sonar primero el encendido del generador y despues habla la radio
 
     private readonly HashSet<VoiceLine> played = new HashSet<VoiceLine>();
     private readonly Queue<AudioClip> queue = new Queue<AudioClip>();
@@ -117,14 +121,33 @@ public class VoiceManager : MonoBehaviour
     {
         if (activated == 1)
         {
-            Play(VoiceLine.PrimerGenerador);
+            PlayDelayed(VoiceLine.PrimerGenerador, delayPrimerGenerador);
         }
     }
 
     private void HandleDoorOpened()
     {
         doorOpened = true;
-        Play(VoiceLine.PuertaAbierta);
+        PlayDelayed(VoiceLine.PuertaAbierta, delayPuertaAbierta);
+    }
+
+    // Bloque C: algunas lineas esperan un poco para no pisar el SFX del mismo evento.
+    // Play() sigue controlando que suene una sola vez y que no suene despues de ganar o perder.
+    private void PlayDelayed(VoiceLine line, float delay)
+    {
+        if (delay <= 0f)
+        {
+            Play(line);
+            return;
+        }
+
+        StartCoroutine(PlayAfter(line, delay));
+    }
+
+    private IEnumerator PlayAfter(VoiceLine line, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Play(line);
     }
 
     private void HandleTimeChanged(int seconds, float fraction)
