@@ -16,6 +16,10 @@ public class WallMovement : MonoBehaviour
     [Header("Wall Run")]
     [SerializeField] private float wallRunSpeed = 6f;
 
+    [Header("Audio - Bloque C")]
+    [SerializeField] private AudioSource sfxWallJump;
+    [SerializeField] private AudioSource sfxWallRun;
+
     private Transform lastWallJumped;
     private CharacterControllerCs _controller;
     private Animator _animator;
@@ -26,6 +30,8 @@ public class WallMovement : MonoBehaviour
     private bool wallOnRight;
     private bool wallOnLeft;
     private bool wallOnFront;
+
+    private bool isWallRunningActive = false;
 
     private void Start()
     {
@@ -50,16 +56,11 @@ public class WallMovement : MonoBehaviour
         wallOnLeft = CheckWall(rayOrigin, -transform.right, out hitLeft);
         wallOnFront = CheckWall(rayOrigin, transform.forward, out hitFront);
 
+        EvaluatedWallRunLogic();
+
         if (wallOnRight || wallOnLeft || wallOnFront)
         {
-            WallRun();
             WallJump();
-        }
-        else
-        {
-            _controller.SetWallRun(false, Vector3.zero, 0f);
-
-            if (_animator != null) _animator.SetBool("IsWallRunning", false);
         }
     }
 
@@ -72,7 +73,7 @@ public class WallMovement : MonoBehaviour
         return false;
     }
 
-    private void WallRun()
+    private void EvaluatedWallRunLogic()
     {
         bool isAirborne = !_controller.IsGrounded;
 
@@ -86,7 +87,9 @@ public class WallMovement : MonoBehaviour
             r2Pressed = Keyboard.current.leftShiftKey.isPressed;
         }
 
-        if (isAirborne && r2Pressed && (wallOnRight || wallOnLeft))
+        bool canWallRun = isAirborne && r2Pressed && (wallOnRight || wallOnLeft);
+
+        if (canWallRun)
         {
             Vector3 wallNormal = wallOnRight ? hitRight.normal : hitLeft.normal;
             Vector3 wallRunDirection = Vector3.Cross(wallNormal, Vector3.up);
@@ -97,16 +100,35 @@ public class WallMovement : MonoBehaviour
             }
 
             _controller.SetWallRun(true, wallRunDirection, wallRunSpeed);
+            SetWallRunSound(true);
+
+            if (!isWallRunningActive)
+            {
+                isWallRunningActive = true;
+                if (_animator != null)
+                {
+                    _animator.SetBool("IsWallRunning", true);
+                }
+            }
+
             if (_animator != null)
             {
-                _animator.SetBool("IsWallRunning", true);
                 _animator.SetBool("IsWallRight", wallOnRight);
             }
         }
         else
         {
-            _controller.SetWallRun(false, Vector3.zero, 0f);
-            if (_animator != null) _animator.SetBool("IsWallRunning", false);
+            if (isWallRunningActive)
+            {
+                isWallRunningActive = false;
+                _controller.SetWallRun(false, Vector3.zero, 0f);
+                SetWallRunSound(false);
+
+                if (_animator != null)
+                {
+                    _animator.SetBool("IsWallRunning", false);
+                }
+            }
         }
     }
 
@@ -146,9 +168,11 @@ public class WallMovement : MonoBehaviour
             if (currentWall != null && currentWall != lastWallJumped)
             {
                 lastWallJumped = currentWall;
+                isWallRunningActive = false;
 
                 Vector3 jumpDirection = (wallNormal * wallJumpSideForce) + (Vector3.up * wallJumpUpForce);
                 _controller.ApplyWallJumpImpulse(jumpDirection);
+                if (sfxWallJump != null) sfxWallJump.Play();
 
                 if (_animator != null)
                 {
@@ -157,5 +181,13 @@ public class WallMovement : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void SetWallRunSound(bool active)
+    {
+        if (sfxWallRun == null) return;
+
+        if (active && !sfxWallRun.isPlaying) sfxWallRun.Play();
+        else if (!active && sfxWallRun.isPlaying) sfxWallRun.Stop();
     }
 }

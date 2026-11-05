@@ -5,6 +5,7 @@ using CharacterScripts;
 public class Generator : MonoBehaviour
 {
     [SerializeField] private GeneratorManager manager;
+    [SerializeField] private AudioSource sfxActivate; // Bloque C
 
     private StarterAssetsInputs playerInput;
     private bool playerNearby;
@@ -21,6 +22,7 @@ public class Generator : MonoBehaviour
             playerInput.InteractInput(false);
 
             manager.ActivateGenerator();
+            if (sfxActivate != null) sfxActivate.Play(); // Bloque C
 
             Debug.Log("Generator activated: " + gameObject.name);
 

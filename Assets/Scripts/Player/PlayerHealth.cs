@@ -5,6 +5,10 @@ public class PlayerHealth : MonoBehaviour
     [Header("Health")]
     [SerializeField] private int maxHealth = 3;
     [SerializeField] private float invulnerabilityTime = 0.5f;
+    [SerializeField] private DamageFeedbackUI damageFeedback;
+
+    [Header("Audio - Bloque C")]
+    [SerializeField] private AudioSource sfxDamage;
 
     private int currentHealth;
     private float nextDamageTime;
@@ -24,7 +28,16 @@ public class PlayerHealth : MonoBehaviour
             return;
 
         currentHealth -= damage;
+
+        if (damageFeedback != null)
+        {
+            damageFeedback.ShowDamage();
+            damageFeedback.SetLowHealth(currentHealth == 1);
+        }
+
         nextDamageTime = Time.time + invulnerabilityTime;
+
+        if (sfxDamage != null) sfxDamage.Play(); // Bloque C
 
         Debug.Log("Player health: " + currentHealth);
 
