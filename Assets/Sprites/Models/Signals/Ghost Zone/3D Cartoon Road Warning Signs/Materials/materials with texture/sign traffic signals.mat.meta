@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 39fda43ce38d77f47b359b583ee29af7
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 260531
+  packageName: 3D Cartoon Road Warning Signs
+  packageVersion: 1.0.1
+  assetPath: Assets/Ghost Zone/3D Cartoon Road Warning Signs/Materials/materials
+    with texture/sign traffic signals.mat
+  uploadId: 600777
